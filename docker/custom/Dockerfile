@@ -10,7 +10,8 @@ COPY Makefile /stash/
 COPY ./graphql /stash/graphql/
 COPY ./ui /stash/ui/
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10.30.3
+ENV PNPM_CONFIG_MANAGE_PACKAGE_MANAGER_VERSIONS=false
 RUN make pre-ui
 RUN make generate-ui
 
@@ -48,3 +49,4 @@ RUN make flags-release flags-pie stash
 FROM stashapp/stash:v0.31.1
 
 COPY --from=backend /stash/stash /usr/bin/stash
+
